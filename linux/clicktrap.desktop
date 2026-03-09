@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Holiday Photo
+Exec=CLICKTRAP_PATH/run_clicktrap.sh
+Icon=CLICKTRAP_PATH/assets/photo.jpg
+Type=Application
+Terminal=false
