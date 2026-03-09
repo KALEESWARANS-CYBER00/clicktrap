@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClickTrap - Cybersecurity Awareness Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #b71c1c;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #fff;
+    }
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #ff5252;
+    }
+    a {
+      color: #ff8a80;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    pre {
+      background-color: #333;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #b71c1c;
+      color: #fff;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 0;
+      background-color: #d32f2f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: #ff1744;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ClickTrap</h1>
+  <p>Cybersecurity Awareness Project</p>
+</header>
+
+<main>
+  <h2>Project Overview</h2>
+  <p>ClickTrap is a cybersecurity awareness project designed to demonstrate how attackers can disguise files as normal images and educate users about safe file handling. When the user clicks the “fake” image, a fullscreen awareness message is displayed explaining the risks of opening unknown files.</p>
+
+  <h2>Features</h2>
+  <ul>
+    <li>Fake image triggers awareness message.</li>
+    <li>Linux desktop integration via .desktop file.</li>
+    <li>Easy installation with installer script.</li>
+    <li>Cross-platform support (Linux + future Windows support).</li>
+  </ul>
+
+  <h2>Installation</h2>
+  <p>Clone the repository and run the installer:</p>
+  <pre>
+git clone https://github.com/KALEESWARANS-CYBER00/clicktrap.git
+cd clicktrap
+./install.sh
+  </pre>
+  <p>After running the installer, a “Holiday Photo” icon will appear on your Desktop. Clicking it will trigger the awareness demo.</p>
+
+  <h2>Download</h2>
+  <p>You can download ClickTrap directly from GitHub:</p>
+  <a href="https://github.com/KALEESWARANS-CYBER00/clicktrap/archive/refs/heads/main.zip" class="button">Download ZIP</a>
+  <p>Or clone the repository:</p>
+  <pre>git clone https://github.com/username/clicktrap.git</pre>
+
+  <h2>Manual / User Guide</h2>
+  <ol>
+    <li>Run <code>install.sh</code> to create the Desktop launcher.</li>
+    <li>Click the “Holiday Photo” icon on the Desktop.</li>
+    <li>The fake image will open and the awareness message will display.</li>
+    <li>Close the message to finish the demo.</li>
+  </ol>
+
+  <h2>Screenshots</h2>
+  <p>See the <a href="screenshots/">screenshots folder</a> for demo images.</p>
+</main>
+
+<footer>
+  &copy; 2026 ClickTrap Project. All Rights Reserved.
+</footer>
+
+</body>
+</html>
