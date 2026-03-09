@@ -1,160 +1,693 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ClickTrap – Cybersecurity Awareness Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLICKTRAP | Cybersecurity Awareness Exhibit</title>
+  <meta name="description" content="ClickTrap: A documentary-style exploration of human fallibility in cybersecurity.">
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background:#0f172a;
-  color:#e5e7eb;
-  margin:0;
-}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
 
-header{
-  background:#b91c1c;
-  padding:25px;
-  text-align:center;
-}
+  <!-- GSAP for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-header h1{
-  margin:0;
-  font-size:32px;
-}
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --accent: #ff0033;
+      --text: #e0e0e0;
+      --muted: #808080;
+      --font-main: 'Inter', sans-serif;
+      --font-heading: 'Syne', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+    }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:30px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-h2{
-  color:#f87171;
-}
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
 
-code{
-  background:#1e293b;
-  padding:3px 6px;
-  border-radius:4px;
-}
+    /* Film Grain Effect */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1000;
+    }
 
-pre{
-  background:#1e293b;
-  padding:15px;
-  border-radius:6px;
-  overflow-x:auto;
-}
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-.button{
-  display:inline-block;
-  padding:12px 22px;
-  background:#ef4444;
-  color:white;
-  text-decoration:none;
-  border-radius:6px;
-  margin-top:10px;
-}
+    /* --- Hero Section --- */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
 
-.button:hover{
-  background:#dc2626;
-}
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, 0.4), var(--bg)),
+        url('assets/hero.png') center/cover no-repeat;
+      z-index: -1;
+      transform: scale(1.1);
+    }
 
-.screenshots{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-top:20px;
-}
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      line-height: 0.8;
+      margin-bottom: 1rem;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+      position: relative;
+    }
 
-.screenshots img{
-  width:100%;
-  border-radius:8px;
-  border:2px solid #334155;
-}
+    .hero h1 span {
+      color: var(--text);
+      -webkit-text-stroke: 0;
+    }
 
-footer{
-  background:#020617;
-  padding:20px;
-  text-align:center;
-  margin-top:40px;
-}
-</style>
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      max-width: 600px;
+      color: var(--muted);
+    }
 
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-10px);
+      }
+
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* --- Sections --- */
+    section {
+      padding: 10rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: #d1d1d1;
+      margin-bottom: 1.5rem;
+      max-width: 720px;
+      letter-spacing: 0.01em;
+    }
+
+    /* --- About Section --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-accent-text {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      line-height: 1.3;
+      color: var(--text);
+      border-left: 2px solid var(--accent);
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* --- Features Section --- */
+    .features-list {
+      list-style: none;
+      counter-reset: feature-counter;
+    }
+
+    .features-list li {
+      counter-increment: feature-counter;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .features-list li::before {
+      content: counter(feature-counter, decimal-leading-zero);
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+
+    .feature-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* --- Technical Blueprint --- */
+    .technical {
+      background: #0f0f0f;
+      border-radius: 2rem;
+      padding: 6rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    pre {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 1rem;
+      color: #88ff88;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      border-left: 4px solid var(--accent);
+      margin: 2rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 0, 51, 0.3);
+    }
+
+    /* --- Analysis Grid --- */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .analysis-item {
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 1.5rem;
+      position: relative;
+    }
+
+    .analysis-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .analysis-item h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .analysis-item p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #aaa;
+    }
+
+    /* --- Exhibit Section --- */
+    .exhibits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .exhibit-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 1rem;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .exhibit-card:hover {
+      transform: scale(1.02);
+    }
+
+    .exhibit-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s ease;
+    }
+
+    .exhibit-card:hover img {
+      filter: grayscale(0%);
+    }
+
+    .exhibit-label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    /* --- The Operative --- */
+    .operative {
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 4rem;
+    }
+
+    .operative-info h3 {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .operative-role {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .technical {
+        padding: 2rem;
+      }
+
+      .operative {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .exhibits {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-<h1>ClickTrap</h1>
-<p>Cybersecurity Awareness Demonstration Tool</p>
-</header>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <h1 id="hero-title">CLICK<span>TRAP</span></h1>
+    <p class="hero-subtitle">Exploring the anatomy of a digital deception.</p>
+    <div class="scroll-indicator">Initiate Scroll</div>
+  </section>
 
-<div class="container">
+  <div class="container">
 
-<h2>About</h2>
-<p>
-ClickTrap is a cybersecurity awareness project demonstrating how attackers
-can disguise files as harmless images. When a user clicks the fake image,
-an awareness screen appears explaining the risk of opening unknown files.
-</p>
+    <section id="about">
+      <div class="section-header">
+        <span class="section-label">PART I • THE PREMISE</span>
+        <h2 class="reveal">The Cognitive Vulnerability</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="reveal">
+            In the modern digital landscape, the most sophisticated firewall is rendered obsolete by a single,
+            instinctual movement: the double-click. <strong>ClickTrap</strong> serves as a living documentary of this
+            human fallibility. It is not merely a technical demonstration, but a study of the <strong>Cognitive
+              Gap</strong>—the split-second between curiosity and consequence where security protocols are often
+            abandoned for the promise of a visual narrative.
+          </p>
+          <div class="about-accent-text reveal">
+            "The greatest exploit in the history of computing is not a line of code, but the exploitation of trust."
+          </div>
+        </div>
+        <div>
+          <p class="reveal">
+            ClickTrap meticulously deconstructs the <strong>Visual Deception</strong> lifecycle. By weaponizing the
+            familiarity of a 'Holiday Photo,' the project reveals how attackers leverage emotional hooks and social
+            context to bypass the user's critical thinking. This is social engineering at its most elemental
+            level—stripping away technical jargon to expose the raw mechanics of an entry point.
+          </p>
+          <p class="reveal">
+            The mission is clear: to transform a moment of potential compromise into a permanent lesson in digital
+            hygiene, forcing the user to witness their own curiosity being turned against them.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<h2>Features</h2>
-<ul>
-<li>Fake image trigger demonstration</li>
-<li>Desktop launcher using Linux <code>.desktop</code></li>
-<li>Installer script for quick setup</li>
-<li>Educational awareness message</li>
-</ul>
+    <section id="features">
+      <div class="section-header">
+        <span class="section-label">PART II • THE ARCHITECTURE OF DECEIT</span>
+        <h2 class="reveal">Technical Sophistication</h2>
+      </div>
+      <ul class="features-list">
+        <li class="reveal">
+          <div>
+            <span class="feature-title">The MIME Masking Protocol</span>
+            <p>Utilizes advanced Linux Desktop Entry specifications (XDG) to override default icon and mime-type
+              associations, effectively skinning a high-level Python script as a standard binary image asset.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div>
+            <span class="feature-title">Non-Destructive Execution Flow</span>
+            <p>Architected for safety. The execution chain intercepts the 'Open' command, redirecting the user to a
+              secure awareness container while simultaneously opening the decoy image to maintain the illusion of
+              legitimacy.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div>
+            <span class="feature-title">Environment Awareness Logic</span>
+            <p>Integrated scripts detect the user's desktop environment and pathing variables to ensure the trap
+              triggers consistently across various Linux distributions without requiring root elevation for initial
+              execution.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <div>
+            <span class="feature-title">The Behavioral Mirror</span>
+            <p>Instead of exfiltrating data, the tool displays a high-impact visual terminal that mirrors the user's
+              actions back to them, providing a forensic breakdown of how the 'infection' would have occurred in a
+              real-world scenario.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-<h2>Installation</h2>
+    <section id="exhibits">
+      <div class="section-header">
+        <span class="section-label">PART III • FORENSIC EVIDENCE</span>
+        <h2 class="reveal">Visual Documentation</h2>
+      </div>
+      <div class="exhibits-wrapper reveal">
+        <div class="exhibits">
+          <div class="exhibit-card">
+            <img src="screenshots/screenshot_1.png" alt="Forensic Image 1">
+            <span class="exhibit-label">EXHIBIT A: THE TRIGGER PHASE</span>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">Observation: The user encounters a seemingly
+              benign photographic asset. Note the absence of visual anomalies in the iconography.</p>
+          </div>
+          <div class="exhibit-card">
+            <img src="screenshots/screenshot_2.png" alt="Forensic Image 2">
+            <span class="exhibit-label">EXHIBIT B: THE BREACH NOTIFICATION</span>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #888;">Observation: Upon execution, the illusion
+              persists momentarily before the awareness container initializes, revealing the vulnerability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<pre>
-git clone https://github.com/YOUR_USERNAME/clicktrap.git
+    <section id="attack-vector">
+      <div class="section-header">
+        <span class="section-label">PART IV • ANATOMY OF THE ATTACK</span>
+        <h2 class="reveal">The Disguised Executable</h2>
+      </div>
+      <p class="reveal">
+        The "ClickTrap" methodology is a subset of the <strong>Trojanized File Architecture</strong>. While modern operating systems have introduced layered defenses, the fundamental logic of the attack remains focused on bypassing the technical via the psychological.
+      </p>
+      
+      <div class="analysis-grid">
+        <div class="analysis-item reveal">
+          <h4>Stage 01: Skinning the Payload</h4>
+          <p>
+            The attacker selects a target file format that the user expects to be "inert"—typically an image (JPG, PNG), a document (PDF), or a media file. By utilizing the <strong>Double Extension</strong> technique or manipulating <strong>Desktop Entry Specifications</strong>, the execution bit is hidden behind a familiar facade.
+          </p>
+        </div>
+        <div class="analysis-item reveal">
+          <h4>Stage 02: The False Environment</h4>
+          <p>
+            Upon execution, the malware performs a <strong>Dual-Action Chain</strong>. It opens the expected decoy file (the image) to prevent immediate suspicion while silently spawning a background process. This provides the attacker with a window of time before the user realizes any anomaly has occurred.
+          </p>
+        </div>
+        <div class="analysis-item reveal">
+          <h4>Stage 03: The Persistence Hook</h4>
+          <p>
+            Beyond the initial click, advanced variations of this attack will use the script to establish <strong>Persistence</strong>. This could involve modifying startup directories or system registry keys, ensuring that the initial "moment of curiosity" translates into a long-term foothold within the victim's architecture.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="blueprint">
+      <div class="technical reveal">
+        <div class="section-header">
+          <span class="section-label">PART V • TECHNICAL BLUEPRINT</span>
+          <h2>Initialization</h2>
+        </div>
+        <p>Deploy the tool in a secure, isolated Linux environment to begin the awareness simulation.</p>
+        <pre>
+# Clone the repository
+git clone https://github.com/KALEESWARANS-CYBER00/clicktrap.git
+
+# Enter the research directory
 cd clicktrap
+
+# Elevate permissions and initiate
 chmod +x install.sh
-./install.sh
-</pre>
+./install.sh</pre>
+        <p>Post-deployment, a high-fidelity <strong>Holiday Photo</strong> asset will materialize on the user's
+          workspace, serving as the primary interaction point.</p>
 
-<p>After installation, a <b>Holiday Photo</b> icon appears on the Desktop.</p>
+        <a class="btn" href="https://github.com/KALEESWARANS-CYBER00/clicktrap/archive/refs/heads/main.zip">
+          Acquire Source .ZIP
+        </a>
+      </div>
+    </section>
 
-<h2>Download</h2>
+    <section id="operative">
+      <div class="operative reveal">
+        <div class="operative-info">
+          <span class="section-label">PART VI • THE RESEARCHER</span>
+          <span class="operative-role">KALEESWARAN S</span>
+          <h3>The Human Factor</h3>
+          <p>
+            An Ethical Hacker, Red Team Operator, and CTF Strategist dedicated to mapping the intersection of offensive
+            security and human behavioral patterns. ClickTrap is part of a broader research initiative into
+            <strong>Curiosity as a Vector</strong>, aiming to bridge the gap between technical security measures and
+            user decision-making processes.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<a class="button" href="https://github.com/YOUR_USERNAME/clicktrap/archive/refs/heads/main.zip">
-Download ZIP
-</a>
+  </div>
 
-<h2>Usage</h2>
+  <footer>
+    <div class="container">
+      &copy; 2026 CLICKTRAP PROJECT - FOR EDUCATIONAL PURPOSES ONLY.
+    </div>
+  </footer>
 
-<ol>
-<li>Run the installer.</li>
-<li>A Desktop icon called <b>Holiday Photo</b> appears.</li>
-<li>Click the icon.</li>
-<li>The disguised photo opens.</li>
-<li>A cybersecurity awareness message appears.</li>
-</ol>
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
 
-<h2>Screenshots</h2>
+      #hero-title,
+      .hero-subtitle {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
 
-<div class="screenshots">
-<img src="screenshots/screenshot_1.png" alt="ClickTrap Demo Screenshot 1">
-<img src="screenshots/screenshot_2.png" alt="ClickTrap Demo Screenshot 2">
-</div>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
 
-<h2>Author</h2>
+    // Hero Parallax
+    gsap.to(".hero-bg", {
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      },
+      y: 200,
+      scale: 1.3
+    });
 
-<p>
-<strong>KALEESWARAN S</strong><br>
-Ethical Hacker • Red Team Operator • CTF Player<br>
-Focused on offensive security research and cybersecurity education.
-</p>
+    // Hero Text Animation
+    gsap.from("#hero-title", {
+      duration: 1.5,
+      y: 100,
+      opacity: 0,
+      ease: "power4.out",
+      delay: 0.5
+    });
 
-</div>
+    gsap.from(".hero-subtitle", {
+      duration: 1.5,
+      y: 30,
+      opacity: 0,
+      ease: "power3.out",
+      delay: 1
+    });
 
-<footer>
-ClickTrap Project • Cybersecurity Awareness Demo
-</footer>
+    // Section Animations
+    const reveals = document.querySelectorAll(".reveal");
 
+    reveals.forEach((reveal) => {
+      gsap.to(reveal, {
+        scrollTrigger: {
+          trigger: reveal,
+          start: "top 85%",
+          toggleActions: "play none none none"
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+    });
+
+    // Feature items staggered
+    gsap.from(".features-list li", {
+      scrollTrigger: {
+        trigger: ".features-list",
+        start: "top 80%"
+      },
+      x: -50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power2.out"
+    });
+  </script>
 </body>
+
 </html>
