@@ -391,34 +391,215 @@
       letter-spacing: 0.1em;
     }
 
-    /* --- Mobile Responsive --- */
+    /* --- Legal Section --- */
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .legal-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .legal-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .legal-number {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      line-height: 1;
+    }
+
+    .legal-content .feature-title {
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .legal-content p {
+      font-size: 0.95rem;
+      color: #aaa;
+      margin-bottom: 0;
+    }
+
+    .penalty-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: rgba(255, 0, 51, 0.05);
+      border-radius: 0.75rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .penalty-label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .penalty-box p {
+      color: #ddd;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    /* --- Mobile Responsive Enhancements --- */
     @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 0 1.25rem;
+      }
+
+      section {
+        padding: 6rem 0;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 15vw, 5rem);
+        line-height: 1;
+        margin-bottom: 2rem;
+        -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+
       h2 {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 2.5rem);
+        margin-bottom: 2rem;
       }
 
+      p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      /* Mobile-specific layout shifts */
       .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .technical {
-        padding: 2rem;
-      }
-
-      .operative {
+        display: flex;
         flex-direction: column;
-        text-align: center;
-        gap: 2rem;
+        gap: 2.5rem;
+      }
+
+      .about-accent-text {
+        font-size: 1.4rem;
+        padding-left: 1.25rem;
+        margin: 1.5rem 0;
+      }
+
+      .legal-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .legal-card {
+        padding: 1.75rem;
+      }
+
+      .legal-number {
+        font-size: 2rem;
+        opacity: 0.1;
+      }
+
+      .analysis-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
       }
 
       .exhibits {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .technical {
+        padding: 2.5rem 1.25rem;
+        border-radius: 1rem;
+      }
+
+      pre {
+        font-size: 0.75rem;
+        padding: 1.25rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .operative {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 2.5rem;
+      }
+
+      .operative-info h3 {
+        font-size: 1.8rem;
+      }
+
+      /* Unique Mobile UI Element: Progress Marker */
+      .section-label::before {
+        content: "";
+        display: inline-block;
+        width: 25px;
+        height: 1px;
+        background: var(--accent);
+        vertical-align: middle;
+        margin-right: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.8rem;
+        /* Force a size that fits CLICKTRAP (~31px/char) */
+      }
+
+      .hero h1 span {
+        display: block;
+        /* Stack TRAP below CLICK if needed, but let's try to fit first */
+      }
+
+      .section-label {
+        font-size: 0.75rem;
+      }
+
+      .feature-title {
+        font-size: 1.2rem;
       }
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(20px);
     }
   </style>
 </head>
@@ -536,27 +717,113 @@
         <h2 class="reveal">The Disguised Executable</h2>
       </div>
       <p class="reveal">
-        The "ClickTrap" methodology is a subset of the <strong>Trojanized File Architecture</strong>. While modern operating systems have introduced layered defenses, the fundamental logic of the attack remains focused on bypassing the technical via the psychological.
+        The "ClickTrap" methodology is a subset of the <strong>Trojanized File Architecture</strong>. While modern
+        operating systems have introduced layered defenses, the fundamental logic of the attack remains focused on
+        bypassing the technical via the psychological.
       </p>
-      
+
       <div class="analysis-grid">
         <div class="analysis-item reveal">
           <h4>Stage 01: Skinning the Payload</h4>
           <p>
-            The attacker selects a target file format that the user expects to be "inert"—typically an image (JPG, PNG), a document (PDF), or a media file. By utilizing the <strong>Double Extension</strong> technique or manipulating <strong>Desktop Entry Specifications</strong>, the execution bit is hidden behind a familiar facade.
+            The attacker selects a target file format that the user expects to be "inert"—typically an image (JPG, PNG),
+            a document (PDF), or a media file. By utilizing the <strong>Double Extension</strong> technique or
+            manipulating <strong>Desktop Entry Specifications</strong>, the execution bit is hidden behind a familiar
+            facade.
           </p>
         </div>
         <div class="analysis-item reveal">
           <h4>Stage 02: The False Environment</h4>
           <p>
-            Upon execution, the malware performs a <strong>Dual-Action Chain</strong>. It opens the expected decoy file (the image) to prevent immediate suspicion while silently spawning a background process. This provides the attacker with a window of time before the user realizes any anomaly has occurred.
+            Upon execution, the malware performs a <strong>Dual-Action Chain</strong>. It opens the expected decoy file
+            (the image) to prevent immediate suspicion while silently spawning a background process. This provides the
+            attacker with a window of time before the user realizes any anomaly has occurred.
           </p>
         </div>
         <div class="analysis-item reveal">
           <h4>Stage 03: The Persistence Hook</h4>
           <p>
-            Beyond the initial click, advanced variations of this attack will use the script to establish <strong>Persistence</strong>. This could involve modifying startup directories or system registry keys, ensuring that the initial "moment of curiosity" translates into a long-term foothold within the victim's architecture.
+            Beyond the initial click, advanced variations of this attack will use the script to establish
+            <strong>Persistence</strong>. This could involve modifying startup directories or system registry keys,
+            ensuring that the initial "moment of curiosity" translates into a long-term foothold within the victim's
+            architecture.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="legal">
+      <div class="section-header">
+        <span class="section-label">PART V • THE LEGAL FRAMEWORK</span>
+        <h2 class="reveal">Cybercrime Laws in India</h2>
+      </div>
+      <p class="reveal">
+        The Information Technology Act, 2000 (IT Act) serves as the legal foundation for addressing cyber offenses in
+        India. It establishes stringent penalties for actions that compromise the integrity of digital systems and data.
+      </p>
+
+      <div class="legal-grid">
+        <div class="legal-card reveal">
+          <div class="legal-number">Sec. 43</div>
+          <div class="legal-content">
+            <span class="feature-title">Unauthorized Access or Damage</span>
+            <p>Accessing a computer system without permission, copying or downloading data, introducing viruses, or
+              disrupting networks.</p>
+            <div class="penalty-box">
+              <span class="penalty-label">Penalty:</span>
+              <p>Compensation up to ₹1 crore or more to the affected party.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-card reveal">
+          <div class="legal-number">Sec. 65</div>
+          <div class="legal-content">
+            <span class="feature-title">Tampering with Computer Source Code</span>
+            <p>Intentionally concealing, destroying, or altering computer source code that is required to be preserved
+              by law.</p>
+            <div class="penalty-box">
+              <span class="penalty-label">Punishment:</span>
+              <p>Up to 3 years imprisonment or fine up to ₹2 lakh, or both.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-card reveal">
+          <div class="legal-number">Sec. 66</div>
+          <div class="legal-content">
+            <span class="feature-title">Computer Related Offences (Hacking)</span>
+            <p>Unauthorized access to computer systems, data theft, or actions that cause damage to computer resources.
+            </p>
+            <div class="penalty-box">
+              <span class="penalty-label">Punishment:</span>
+              <p>Up to 3 years imprisonment or fine up to ₹5 lakh, or both.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-card reveal">
+          <div class="legal-number">Sec. 66C</div>
+          <div class="legal-content">
+            <span class="feature-title">Identity Theft</span>
+            <p>Fraudulent use of another person’s password, digital signature, or unique electronic identity.</p>
+            <div class="penalty-box">
+              <span class="penalty-label">Punishment:</span>
+              <p>Up to 3 years imprisonment and fine up to ₹1 lakh.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="legal-card reveal">
+          <div class="legal-number">Sec. 66D</div>
+          <div class="legal-content">
+            <span class="feature-title">Cheating by Personation Using Computer Resources</span>
+            <p>Online fraud, phishing, or impersonation using computer resources to deceive others. </p>
+            <div class="penalty-box">
+              <span class="penalty-label">Punishment:</span>
+              <p>Up to 3 years imprisonment and fine up to ₹1 lakh.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -564,7 +831,7 @@
     <section id="blueprint">
       <div class="technical reveal">
         <div class="section-header">
-          <span class="section-label">PART V • TECHNICAL BLUEPRINT</span>
+          <span class="section-label">PART VI • TECHNICAL BLUEPRINT</span>
           <h2>Initialization</h2>
         </div>
         <p>Deploy the tool in a secure, isolated Linux environment to begin the awareness simulation.</p>
@@ -590,7 +857,7 @@ chmod +x install.sh
     <section id="operative">
       <div class="operative reveal">
         <div class="operative-info">
-          <span class="section-label">PART VI • THE RESEARCHER</span>
+          <span class="section-label">PART VII • THE RESEARCHER</span>
           <span class="operative-role">KALEESWARAN S</span>
           <h3>The Human Factor</h3>
           <p>
@@ -685,6 +952,19 @@ chmod +x install.sh
       opacity: 0,
       duration: 1,
       stagger: 0.2,
+      ease: "power2.out"
+    });
+
+    // Legal items staggered
+    gsap.from(".legal-card", {
+      scrollTrigger: {
+        trigger: ".legal-grid",
+        start: "top 80%"
+      },
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
       ease: "power2.out"
     });
   </script>
