@@ -29,7 +29,7 @@ Instead of exfiltrating data, ClickTrap provides immediate forensic feedback. Th
 
 ## Architecture of Deceit
 
-- **The Chameleon Protocol**: Advanced file disguising using Linux Desktop Entry (XDG) specifications.
+- **The Chameleon Protocol**: Advanced file disguising using Linux Desktop Entry (XDG) specifications and Windows Shortcuts.
 - **Immediate Feedback Loop**: A sophisticated educational briefing that replaces malicious payloads.
 - **Low-Level Orchestration**: Native shell scripting and Python-driven logic for seamless environment integration.
 - **MIME Masking**: Overriding icon and mime-type associations to maintain the visual ruse.
@@ -42,6 +42,7 @@ Instead of exfiltrating data, ClickTrap provides immediate forensic feedback. Th
 - **Python 3.x**
 - **Tkinter** (Standard on most Linux distributions: `sudo apt install python3-tk`)
 - **Linux Environment** (Optimized for Ubuntu/Debian/Fedora)
+- **Windows OS** (For the standalone Windows launcher -> No Python/Admin rights required)
 
 ### Installation
 Deploy the tool in a secure, isolated research environment:
@@ -58,10 +59,27 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### Observation
+### Linux Observation
 1. After installation, a **Holiday Photo** asset will materialize on your workspace.
 2. Trigger the interaction by double-clicking the asset.
 3. Observe the simultaneous launch of the decoy image and the awareness briefing.
+
+### Windows Awareness
+
+For Windows users (No Administrator privileges required):
+
+1. Navigate to the `windows` folder.
+2. Double-click `clicktrap_windows.bat` or run `clicktrap_windows.ps1` via PowerShell.
+3. A safe GUI warning message will appear demonstrating cybersecurity awareness. It also safely logs the OS and username locally to `clicktrap_execution.log`.
+
+**Visual Disguise (Windows):**
+To complete the illusion on Windows, you can disguise the script as an image:
+1. Right-click `clicktrap_windows.bat` and select **Create shortcut**.
+2. Rename the shortcut to something enticing, e.g., `holiday_photo.jpg` (Windows natively hides the `.lnk` extension).
+3. Right-click the shortcut -> **Properties** -> **Shortcut** tab -> **Change Icon**.
+4. Browse to any generic image icon (e.g., in `%SystemRoot%\System32\imageres.dll`) and apply it. Use an `.ico` converter if you want to use the included `assets/icon.png`.
+5. Under the **Shortcut** tab, set **Run** to **Minimized** for an even stealthier execution.
+6. A user double-clicking this "image" triggers the safe awareness payload.
 
 ---
 
