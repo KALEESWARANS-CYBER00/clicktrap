@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLICKTRAP | Cybersecurity Awareness Exhibit</title>
+  <title>CLICKTRAP | Cybersecurity Awareness Exhibit | KALEESWARAN Cybersecurity</title>
   <meta name="description" content="ClickTrap: A documentary-style exploration of human fallibility in cybersecurity.">
 
   <!-- Fonts -->
@@ -597,9 +597,150 @@
       }
     }
 
+    /* --- Chrome-style Download Section --- */
+    .download-section {
+      text-align: center;
+      padding: 12rem 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 0, 51, 0.1) 0%, transparent 75%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-hero-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4rem;
+      padding: 6rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+    }
+
+    .download-icon-outer {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+
+    .download-icon-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 28%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 25px 50px rgba(255, 0, 51, 0.3);
+      animation: pulse-red 3s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 51, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 30px rgba(255, 0, 51, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 51, 0);
+      }
+    }
+
+    .download-title {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 10vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 2rem;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+
+    .download-subtitle {
+      font-size: 1.3rem;
+      color: var(--muted);
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .chrome-btn-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .chrome-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 1.5rem 5rem;
+      background: var(--accent);
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.25rem;
+      border-radius: 100px;
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 15px 40px rgba(255, 0, 51, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chrome-pill:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 25px 60px rgba(255, 0, 51, 0.5);
+      background: #ff1a4a;
+    }
+
+    .download-meta {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .download-meta::before,
+    .download-meta::after {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .blueprint-reveal-btn {
+      margin-top: 6rem;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.8rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    .blueprint-reveal-btn:hover {
+      opacity: 1;
+      letter-spacing: 0.3em;
+    }
+
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
   </style>
 </head>
@@ -654,14 +795,14 @@
         <h2 class="reveal">Technical Sophistication</h2>
       </div>
       <ul class="features-list">
-        <li class="reveal">
+        <li>
           <div>
             <span class="feature-title">The MIME Masking Protocol</span>
             <p>Utilizes advanced Linux Desktop Entry specifications (XDG) to override default icon and mime-type
               associations, effectively skinning a high-level Python script as a standard binary image asset.</p>
           </div>
         </li>
-        <li class="reveal">
+        <li>
           <div>
             <span class="feature-title">Non-Destructive Execution Flow</span>
             <p>Architected for safety. The execution chain intercepts the 'Open' command, redirecting the user to a
@@ -669,7 +810,7 @@
               legitimacy.</p>
           </div>
         </li>
-        <li class="reveal">
+        <li>
           <div>
             <span class="feature-title">Environment Awareness Logic</span>
             <p>Integrated scripts detect the user's desktop environment and pathing variables to ensure the trap
@@ -677,7 +818,7 @@
               execution.</p>
           </div>
         </li>
-        <li class="reveal">
+        <li>
           <div>
             <span class="feature-title">The Behavioral Mirror</span>
             <p>Instead of exfiltrating data, the tool displays a high-impact visual terminal that mirrors the user's
@@ -723,7 +864,7 @@
       </p>
 
       <div class="analysis-grid">
-        <div class="analysis-item reveal">
+        <div class="analysis-item">
           <h4>Stage 01: Skinning the Payload</h4>
           <p>
             The attacker selects a target file format that the user expects to be "inert"—typically an image (JPG, PNG),
@@ -732,7 +873,7 @@
             facade.
           </p>
         </div>
-        <div class="analysis-item reveal">
+        <div class="analysis-item">
           <h4>Stage 02: The False Environment</h4>
           <p>
             Upon execution, the malware performs a <strong>Dual-Action Chain</strong>. It opens the expected decoy file
@@ -740,7 +881,7 @@
             attacker with a window of time before the user realizes any anomaly has occurred.
           </p>
         </div>
-        <div class="analysis-item reveal">
+        <div class="analysis-item">
           <h4>Stage 03: The Persistence Hook</h4>
           <p>
             Beyond the initial click, advanced variations of this attack will use the script to establish
@@ -763,7 +904,7 @@
       </p>
 
       <div class="legal-grid">
-        <div class="legal-card reveal">
+        <div class="legal-card">
           <div class="legal-number">Sec. 43</div>
           <div class="legal-content">
             <span class="feature-title">Unauthorized Access or Damage</span>
@@ -776,7 +917,7 @@
           </div>
         </div>
 
-        <div class="legal-card reveal">
+        <div class="legal-card">
           <div class="legal-number">Sec. 65</div>
           <div class="legal-content">
             <span class="feature-title">Tampering with Computer Source Code</span>
@@ -789,7 +930,7 @@
           </div>
         </div>
 
-        <div class="legal-card reveal">
+        <div class="legal-card">
           <div class="legal-number">Sec. 66</div>
           <div class="legal-content">
             <span class="feature-title">Computer Related Offences (Hacking)</span>
@@ -802,7 +943,7 @@
           </div>
         </div>
 
-        <div class="legal-card reveal">
+        <div class="legal-card">
           <div class="legal-number">Sec. 66C</div>
           <div class="legal-content">
             <span class="feature-title">Identity Theft</span>
@@ -814,7 +955,7 @@
           </div>
         </div>
 
-        <div class="legal-card reveal">
+        <div class="legal-card">
           <div class="legal-number">Sec. 66D</div>
           <div class="legal-content">
             <span class="feature-title">Cheating by Personation Using Computer Resources</span>
@@ -828,14 +969,37 @@
       </div>
     </section>
 
-    <section id="blueprint">
-      <div class="technical reveal">
-        <div class="section-header">
-          <span class="section-label">PART VI • TECHNICAL BLUEPRINT</span>
-          <h2>Initialization</h2>
+    <section id="blueprint" class="download-section">
+      <div class="container reveal">
+        <div class="download-hero-box">
+          <div class="download-icon-outer">
+            <div class="download-icon-inner">CT</div>
+          </div>
+          <h2 class="download-title">Get ClickTrap</h2>
+          <p class="download-subtitle">Secure, fast, and engineered for the ultimate cybersecurity awareness exhibition.
+          </p>
+
+          <div class="chrome-btn-stage">
+            <a class="chrome-pill" href="https://github.com/KALEESWARANS-CYBER00/clicktrap/archive/refs/heads/main.zip">
+              Download ClickTrap
+            </a>
+            <div class="download-meta">Linux Distributions 64-bit</div>
+          </div>
+
+          <button class="blueprint-reveal-btn"
+            onclick="document.getElementById('manual-install').style.display='block'; this.style.display='none'; gsap.from('#manual-install', {opacity: 0, y: 30, duration: 1});">
+            View Source Requirements
+          </button>
         </div>
-        <p>Deploy the tool in a secure, isolated Linux environment to begin the awareness simulation.</p>
-        <pre>
+
+        <div id="manual-install" style="display: none; margin-top: 4rem;">
+          <div class="technical" style="text-align: left; max-width: 900px; margin: 0 auto;">
+            <div class="section-header">
+              <span class="section-label">ADVANCED • RESEARCH CLONE</span>
+              <h2>Technical Blueprint</h2>
+            </div>
+            <p>Deploy the tool in a secure, isolated Linux environment to begin the awareness simulation.</p>
+            <pre>
 # Clone the repository
 git clone https://github.com/KALEESWARANS-CYBER00/clicktrap.git
 
@@ -845,12 +1009,8 @@ cd clicktrap
 # Elevate permissions and initiate
 chmod +x install.sh
 ./install.sh</pre>
-        <p>Post-deployment, a high-fidelity <strong>Holiday Photo</strong> asset will materialize on the user's
-          workspace, serving as the primary interaction point.</p>
-
-        <a class="btn" href="https://github.com/KALEESWARANS-CYBER00/clicktrap/archive/refs/heads/main.zip">
-          Acquire Source .ZIP
-        </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -959,7 +1119,20 @@ chmod +x install.sh
     gsap.from(".legal-card", {
       scrollTrigger: {
         trigger: ".legal-grid",
-        start: "top 80%"
+        start: "top 85%"
+      },
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+
+    // Analysis items staggered
+    gsap.from(".analysis-item", {
+      scrollTrigger: {
+        trigger: ".analysis-grid",
+        start: "top 85%"
       },
       y: 30,
       opacity: 0,
